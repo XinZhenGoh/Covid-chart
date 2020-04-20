@@ -30,6 +30,7 @@ export class ChartComponent implements OnInit {
   mortalityRate: string;
   lastUpdated: string;
   tryDayBefore = false;
+  graphAvailable: boolean;
 
   constructor(private service: DataServiceService) {
   }
@@ -199,12 +200,25 @@ export class ChartComponent implements OnInit {
     this.mortalityRate = ((this.totalDeaths / this.totalConfirmed) * 100).toFixed(0).toString();
 
     if (this.deathsSelected) {
-      this.selectedCountryData = this.deathsData[country];
-      this.updateChartForDeaths();
+      if (this.deathsData[country]){
+        this.selectedCountryData = this.deathsData[country];
+        this.updateChartForDeaths();
+        this.graphAvailable = true;
+      }
+      else {
+        this.graphAvailable = false;
+      }
+
     } else {
       if (this.casesData) {
-        this.selectedCountryData = this.casesData[country];
-        this.updateChartForCases();
+        if (this.casesData[country]){
+          this.selectedCountryData = this.casesData[country];
+          this.updateChartForCases();
+          this.graphAvailable = true;
+        }
+        else{
+          this.graphAvailable = false;
+        }
       }
     }
   }
