@@ -1,13 +1,12 @@
 <div class="ui dimmer" [class.active]='loading'>
   <div class="ui text loader">
     Loading ... Data is being retrieved...if this takes too long please refresh the page</div>
-  <div *ngIf="!globalData">Failing to retrieve global data...</div>
   <div class="d-inline-flex">
   </div>
 </div>
 
 <div class="bg-white text-center p-3 m-0">
-  <div class="text-left">Made by Ray Goh. Data obtained from
+  <div class="text-left">By Ray Goh. Made with Angular and Google Charts. Data extracted daily from
     <a class="" target="_blank" href="https://github.com/CSSEGISandData">Johns Hopkins School of Engineering. </a>
   </div>
   <!--    <h1 class="display-4">Confirmed Cases</h1>-->
@@ -16,7 +15,7 @@
     <div class="col-lg-2 m-lg-5 mb-sm-0">
       <!--          <div class="text-uppercase"><b>Confirmed Cases</b></div>-->
       <div class="p-4 m-sm-0">
-        <label class="country-label">Country Select</label>
+        <label class="country-label">Select Country</label>
         <mat-select [placeholder]="countries[0]" #input (selectionChange)="updateValues(input.value)">
           <mat-option value="{{con}}" *ngFor='let con of countries'>{{con}}</mat-option>
         </mat-select>
@@ -27,8 +26,8 @@
 
     </div>
     <div class="col-lg-8 col-md-12 m-0">
-      <div *ngIf="!deathsSelected" class="d-sm-block d-none mt-2 chartTitle">Number of Cases in {{selectedCountry}}</div>
-      <div *ngIf="deathsSelected" class="d-sm-block d-none mt-2 chartTitle">Number of Deaths in {{selectedCountry}}</div>
+      <div *ngIf="!deathsSelected" class="d-sm-block d-none mt-2 chartTitle">Cases in {{selectedCountry}}</div>
+      <div *ngIf="deathsSelected" class="d-sm-block d-none mt-2 chartTitle">Deaths in {{selectedCountry}}</div>
       <div class="m-3 alert" *ngIf="!graphAvailable">Visual graph is not available at this moment for {{selectedCountry}}</div>
       <google-chart *ngIf="graphAvailable" [data]="chartInterface"></google-chart>
       <button mat-raised-button class="m-3" [disabled]="!deathsSelected" (click)="triggerSelected()">Confirmed Cases</button>
